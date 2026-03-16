@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>マリナ | 恋愛霊視鑑定 — 彼の本音と、この恋の未来を視る</title>
+  <meta name="description" content="タロットと霊視で彼の本音・復縁の可能性・ご縁の流れを読み解く恋愛専門鑑定師マリナ。心が整い、現実が動き出す鑑定。評価★5.0｜500円〜">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Serif JP', serif;
+      background: #050d1a;
+      color: #e8e0f0;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== TOKENS ===== */
+    :root {
+      --navy:       #050d1a;
+      --navy-mid:   #0d1f3c;
+      --blue-glow:  #4db8ff;
+      --blue-deep:  #1a3a6e;
+      --rose:       #e8a0b4;
+      --rose-light: #f5ccd8;
+      --rose-dim:   #8a4a5e;
+      --gold:       #c9a84c;
+      --gold-light: #e8d08a;
+      --gold-dim:   #6a5520;
+      --text:       #ddd5ee;
+      --text-sub:   #8a809a;
+      --text-rose:  #c87890;
+    }
+
+    /* ===== CANVAS ===== */
+    #starCanvas {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0; pointer-events: none;
+    }
+
+    /* ===== STICKY CTA ===== */
+    .sticky-cta {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: rgba(5,13,26,0.96);
+      border-top: 1px solid rgba(77,184,255,0.2);
+      padding: 12px 20px;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 12px;
+      z-index: 200;
+      backdrop-filter: blur(12px);
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(.4,0,.2,1);
+    }
+    .sticky-cta.show { transform: translateY(0); }
+    .sticky-left strong { display: block; font-size: 13px; color: var(--blue-glow); }
+    .sticky-left span   { font-size: 11px; color: var(--text-sub); }
+    .btn-sticky {
+      display: inline-block;
+      background: linear-gradient(135deg, #c9a84c, #e8d08a, #c9a84c);
+      background-size: 200%;
+      animation: shimmer 3s ease infinite;
+      color: #050d1a;
+      font-weight: 700; font-size: 13px;
+      padding: 12px 22px;
+      text-decoration: none;
+      white-space: nowrap;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    @keyframes shimmer {
+      0%,100% { background-position: 0%; }
+      50%      { background-position: 100%; }
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative; z-index: 1;
+      min-height: 100svh;
+      display: grid;
+      grid-template-columns: 1fr;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('marina-profile.jpg');
+      background-size: cover;
+      background-position: center 15%;
+      filter: brightness(0.68) saturate(1.15);
+    }
+    .hero-gradient {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to bottom,
+          rgba(5,13,26,0.15) 0%,
+          rgba(5,13,26,0.0) 30%,
+          rgba(5,13,26,0.55) 72%,
+          #050d1a 100%),
+        linear-gradient(to right,
+          rgba(5,13,26,0.55) 0%,
+          rgba(5,13,26,0.2) 45%,
+          transparent 70%);
+    }
+    .hero-inner {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 60px 28px 80px;
+      max-width: 680px;
+      margin: 0 auto; width: 100%;
+    }
+    .hero-label {
+      font-family: 'Cinzel', serif;
+      font-size: 10px; letter-spacing: 5px;
+      color: var(--blue-glow);
+      margin-bottom: 20px;
+      opacity: 0; animation: fadeUp 1s ease 0.3s forwards;
+    }
+    .hero-title {
+      font-size: clamp(32px, 8vw, 56px);
+      font-weight: 700;
+      line-height: 1.4;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+      opacity: 0; animation: fadeUp 1s ease 0.5s forwards;
+    }
+    .hero-title em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--blue-glow), var(--rose-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(13px, 3vw, 15px);
+      line-height: 2.2;
+      color: rgba(220,210,240,0.85);
+      margin-bottom: 36px;
+      max-width: 420px;
+      opacity: 0; animation: fadeUp 1s ease 0.7s forwards;
+    }
+    .hero-cta-wrap {
+      opacity: 0; animation: fadeUp 1s ease 0.9s forwards;
+    }
+    .btn-hero {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+      background-size: 200%;
+      animation: shimmer 3s ease infinite;
+      color: #050d1a;
+      font-weight: 700; font-size: 15px;
+      letter-spacing: 2px;
+      padding: 18px 36px;
+      text-decoration: none;
+      border-radius: 2px;
+      box-shadow: 0 0 40px rgba(201,168,76,0.35), 0 4px 20px rgba(0,0,0,0.5);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-hero:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 60px rgba(201,168,76,0.5), 0 6px 24px rgba(0,0,0,0.5);
+    }
+    .hero-note {
+      display: block; margin-top: 14px;
+      font-size: 11px; color: var(--text-sub);
+      letter-spacing: 1px;
+    }
+
+    /* ===== SECTION BASE ===== */
+    .section { position: relative; z-index: 1; }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+    .sec-header { text-align: center; margin-bottom: 52px; }
+    .sec-en {
+      font-family: 'Cinzel', serif;
+      font-size: 10px; letter-spacing: 6px;
+      color: var(--blue-glow); margin-bottom: 12px;
+    }
+    .sec-ja {
+      font-size: clamp(22px, 5vw, 30px);
+      font-weight: 700; letter-spacing: 2px; margin-bottom: 14px;
+    }
+    .sec-desc { font-size: 13px; color: var(--text-sub); line-height: 2; }
+    .rose { color: var(--rose); }
+    .gold { color: var(--gold); }
+    .blue { color: var(--blue-glow); }
+
+    /* ===== TRUST BAR ===== */
+    .trust-bar {
+      padding: 28px 20px;
+      background: linear-gradient(90deg, rgba(26,58,110,0.3), rgba(77,184,255,0.08), rgba(26,58,110,0.3));
+      border-top: 1px solid rgba(77,184,255,0.15);
+      border-bottom: 1px solid rgba(77,184,255,0.15);
+    }
+    .trust-inner {
+      display: flex; justify-content: center;
+      gap: 48px; flex-wrap: wrap;
+    }
+    .trust-item { text-align: center; }
+    .trust-num {
+      font-family: 'Cinzel', serif;
+      font-size: 30px; color: var(--blue-glow);
+    }
+    .trust-label {
+      font-size: 10px; color: var(--text-sub);
+      letter-spacing: 2px; margin-top: 4px;
+    }
+
+    /* ===== EMPATHY ===== */
+    .empathy {
+      padding: 90px 0;
+      background: linear-gradient(180deg, #050d1a 0%, #0a1628 60%, #050d1a 100%);
+    }
+    .empathy-list { display: grid; gap: 14px; }
+    .empathy-item {
+      display: flex; align-items: flex-start; gap: 18px;
+      padding: 22px 26px;
+      background: rgba(26,58,110,0.2);
+      border: 1px solid rgba(77,184,255,0.1);
+      border-left: 3px solid rgba(77,184,255,0.4);
+      border-radius: 2px;
+      opacity: 0; transform: translateX(-16px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .empathy-item.visible { opacity: 1; transform: translateX(0); }
+    .empathy-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+    .empathy-text { font-size: 14px; line-height: 1.9; color: var(--text); }
+
+    /* ===== STORY ===== */
+    .story { padding: 90px 0; }
+    .story-photo-wrap {
+      position: relative;
+      max-width: 260px;
+      margin: 0 auto 32px;
+    }
+    .story-photo {
+      width: 100%;
+      border-radius: 4px;
+      display: block;
+      filter: brightness(0.95) saturate(1.1);
+      box-shadow: 0 0 60px rgba(77,184,255,0.25), 0 20px 60px rgba(0,0,0,0.6);
+    }
+    .story-photo-glow {
+      position: absolute; inset: -2px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, rgba(77,184,255,0.3), rgba(232,160,180,0.3), rgba(77,184,255,0.3));
+      z-index: -1;
+      filter: blur(12px);
+    }
+    .story-name-plate {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .story-name {
+      font-family: 'Cinzel', serif;
+      font-size: 22px; letter-spacing: 6px;
+      background: linear-gradient(135deg, var(--blue-glow), var(--rose-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 6px;
+    }
+    .story-role {
+      font-size: 11px; color: var(--text-sub);
+      letter-spacing: 3px;
+    }
+    /* Philosophy quote */
+    .philosophy-quote {
+      text-align: center;
+      font-size: clamp(15px, 3.5vw, 18px);
+      font-weight: 700;
+      line-height: 1.9;
+      color: var(--text);
+      margin-bottom: 40px;
+      padding: 28px 24px;
+      border-left: 3px solid var(--rose);
+      border-right: 3px solid var(--rose);
+      background: rgba(232,160,180,0.04);
+    }
+    .philosophy-quote span {
+      display: block;
+      font-size: 11px; font-weight: 400;
+      letter-spacing: 3px;
+      color: var(--rose); margin-top: 14px;
+    }
+    /* Pillar cards */
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .pillar {
+      text-align: center;
+      padding: 22px 12px;
+      background: rgba(26,58,110,0.2);
+      border: 1px solid rgba(77,184,255,0.12);
+      border-radius: 4px;
+    }
+    .pillar-icon { font-size: 26px; display: block; margin-bottom: 10px; }
+    .pillar-title {
+      font-size: 12px; font-weight: 700;
+      color: var(--blue-glow);
+      margin-bottom: 6px; line-height: 1.5;
+    }
+    .pillar-desc {
+      font-size: 11px; color: var(--text-sub);
+      line-height: 1.7;
+    }
+    @media (max-width: 480px) {
+      .pillars { grid-template-columns: 1fr; gap: 10px; }
+      .pillar { padding: 18px 16px; display: flex; align-items: center; gap: 16px; text-align: left; }
+      .pillar-icon { font-size: 22px; margin-bottom: 0; flex-shrink: 0; }
+    }
+    /* Marina personal message */
+    .marina-msg-blocks {
+      display: grid; gap: 12px;
+      margin-top: 28px;
+    }
+    .marina-msg {
+      padding: 20px 22px;
+      border-radius: 4px;
+      font-size: 13px; line-height: 2;
+      color: var(--text);
+    }
+    .marina-msg-a {
+      background: rgba(26,58,110,0.18);
+      border-left: 3px solid rgba(77,184,255,0.4);
+    }
+    .marina-msg-b {
+      background: rgba(80,20,60,0.2);
+      border-left: 3px solid rgba(232,160,180,0.5);
+    }
+    .marina-msg-b strong { color: var(--rose-light); }
+    .marina-msg-c {
+      background: rgba(26,58,110,0.12);
+      border: 1px solid rgba(77,184,255,0.1);
+      font-style: italic;
+      color: var(--text-sub);
+      font-size: 13px;
+      text-align: center;
+      line-height: 2;
+    }
+
+    /* ===== EMPATHY HEADLINE ===== */
+    .empathy-headline {
+      font-size: 14px; font-weight: 700;
+      color: var(--text); margin-bottom: 4px;
+    }
+    .empathy-sub {
+      font-size: 12px; color: var(--text-sub);
+      line-height: 1.7;
+    }
+
+    /* ===== SOUL VIEW ===== */
+    .soul-view {
+      padding: 90px 0;
+      background: linear-gradient(180deg, #050d1a, #070f1f, #050d1a);
+      position: relative;
+      overflow: hidden;
+    }
+    .soul-view-bg {
+      position: absolute; inset: 0;
+      background-image: url('marina-cosmos.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.08;
+    }
+    .soul-list { display: grid; gap: 12px; position: relative; z-index: 1; }
+    .soul-item {
+      display: flex; align-items: center; gap: 16px;
+      padding: 18px 22px;
+      background: rgba(5,13,26,0.7);
+      border: 1px solid rgba(77,184,255,0.12);
+      border-radius: 2px;
+      font-size: 14px;
+      opacity: 0; transform: translateY(12px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .soul-item.visible { opacity: 1; transform: translateY(0); }
+    .soul-dot {
+      font-size: 20px;
+      flex-shrink: 0;
+      width: 32px; text-align: center;
+    }
+
+    /* ===== SERVICES ===== */
+    .services { padding: 90px 0; }
+    .service-grid { display: grid; gap: 20px; }
+    .service-card {
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, rgba(10,22,50,0.9), rgba(26,58,110,0.3));
+      border: 1px solid rgba(77,184,255,0.15);
+      border-radius: 4px;
+      padding: 32px 26px;
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s, box-shadow 0.3s;
+    }
+    .service-card.visible { opacity: 1; transform: translateY(0); }
+    .service-card:hover {
+      border-color: rgba(77,184,255,0.4);
+      box-shadow: 0 0 40px rgba(77,184,255,0.1);
+      transform: translateY(-3px);
+    }
+    .service-card-accent {
+      position: absolute; top: 0; right: 0;
+      width: 120px; height: 120px;
+      background: radial-gradient(circle at top right, rgba(77,184,255,0.12), transparent 70%);
+    }
+    .service-num {
+      font-family: 'Cinzel', serif;
+      font-size: 10px; letter-spacing: 4px;
+      color: var(--blue-glow); margin-bottom: 10px;
+    }
+    .service-title {
+      font-size: 17px; font-weight: 700;
+      line-height: 1.6; margin-bottom: 14px;
+    }
+    .service-desc {
+      font-size: 13px; line-height: 2.1;
+      color: var(--text-sub); margin-bottom: 22px;
+    }
+    .service-bottom {
+      display: flex; align-items: center;
+      justify-content: space-between;
+    }
+    .service-price {
+      font-family: 'Cinzel', serif;
+      font-size: 24px; color: var(--gold);
+    }
+    .service-price small {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 12px; color: var(--text-sub);
+    }
+    .btn-service {
+      display: inline-block;
+      border: 1px solid var(--blue-glow);
+      color: var(--blue-glow);
+      font-size: 12px; letter-spacing: 2px;
+      padding: 10px 22px;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.3s, color 0.3s;
+    }
+    .btn-service:hover {
+      background: var(--blue-glow);
+      color: #050d1a;
+    }
+
+    /* ===== READING IMAGE ===== */
+    .reading-visual {
+      padding: 0;
+      position: relative; overflow: hidden;
+    }
+    .reading-visual img {
+      width: 100%;
+      display: block;
+      filter: brightness(0.7) saturate(1.1);
+      max-height: 400px;
+      object-fit: cover;
+      object-position: center;
+    }
+    .reading-visual-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(5,13,26,0.8) 0%, transparent 60%);
+      display: flex; align-items: center;
+      padding: 40px 40px;
+    }
+    .reading-quote {
+      max-width: 340px;
+    }
+    .reading-quote blockquote {
+      font-size: clamp(15px, 3.5vw, 20px);
+      font-weight: 700;
+      line-height: 1.8;
+      letter-spacing: 1px;
+      color: #fff;
+    }
+    .reading-quote cite {
+      display: block; margin-top: 16px;
+      font-size: 11px; font-style: normal;
+      letter-spacing: 3px; color: var(--blue-glow);
+    }
+
+    /* ===== FLOW ===== */
+    .flow { padding: 90px 0; background: linear-gradient(180deg, #050d1a, #0a1628, #050d1a); }
+    .flow-steps { display: grid; gap: 0; }
+    .flow-step { display: flex; gap: 24px; }
+    .flow-col-l {
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .flow-num {
+      width: 46px; height: 46px; border-radius: 50%;
+      border: 1px solid rgba(77,184,255,0.4);
+      background: rgba(77,184,255,0.07);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cinzel', serif; font-size: 14px;
+      color: var(--blue-glow); flex-shrink: 0;
+    }
+    .flow-connector {
+      width: 1px; flex: 1; min-height: 36px;
+      background: linear-gradient(180deg, rgba(77,184,255,0.3), transparent);
+      margin: 8px 0;
+    }
+    .flow-col-r { padding: 0 0 44px; }
+    .flow-step:last-child .flow-col-r { padding-bottom: 0; }
+    .flow-title {
+      font-size: 15px; font-weight: 700;
+      color: var(--blue-glow); margin: 12px 0 8px;
+    }
+    .flow-desc {
+      font-size: 13px; line-height: 2.1; color: var(--text-sub);
+    }
+
+    /* ===== VOICE ===== */
+    .voice {
+      padding: 90px 0;
+      background: linear-gradient(180deg, #0a1628, #050d1a);
+    }
+    .voice-grid { display: grid; gap: 16px; }
+    .voice-card {
+      background: rgba(10,22,50,0.6);
+      border: 1px solid rgba(232,160,180,0.12);
+      border-top: 3px solid rgba(232,160,180,0.35);
+      border-radius: 4px;
+      padding: 26px 24px;
+    }
+    .voice-stars { color: var(--gold); font-size: 14px; margin-bottom: 8px; }
+    .voice-service {
+      font-size: 11px; color: var(--text-sub);
+      letter-spacing: 1px; margin-bottom: 14px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .voice-text {
+      font-size: 14px; line-height: 2.1;
+      color: var(--text);
+    }
+    .voice-meta {
+      margin-top: 16px; font-size: 11px;
+      color: var(--rose-dim); letter-spacing: 1px;
+    }
+
+    /* ===== FINAL CTA ===== */
+    .final-cta {
+      padding: 110px 0;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .final-cta-bg {
+      position: absolute; inset: 0;
+      background-image: url('marina-cosmos.jpg');
+      background-size: cover; background-position: center;
+      filter: brightness(0.25) saturate(1.2);
+    }
+    .final-cta-overlay {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(5,13,26,0.4), #050d1a 80%);
+    }
+    .final-inner { position: relative; z-index: 1; }
+    .final-caption {
+      font-family: 'Cinzel', serif;
+      font-size: 10px; letter-spacing: 6px;
+      color: var(--blue-glow); margin-bottom: 20px;
+    }
+    .final-title {
+      font-size: clamp(24px, 6vw, 38px);
+      font-weight: 700; line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .final-sub {
+      font-size: 14px; line-height: 2.2;
+      color: var(--text-sub); margin-bottom: 44px;
+      max-width: 440px; margin-left: auto; margin-right: auto;
+    }
+    .final-guarantee {
+      margin-top: 22px;
+      font-size: 12px; color: var(--text-sub);
+      display: flex; align-items: center;
+      justify-content: center; gap: 6px;
+    }
+
+    /* ===== DIVIDER ===== */
+    .divider {
+      display: flex; align-items: center;
+      gap: 16px; max-width: 280px;
+      margin: 0 auto 60px;
+    }
+    .divider-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(77,184,255,0.4), transparent);
+    }
+    .divider-sym { font-size: 12px; color: var(--blue-glow); }
+
+    /* ===== FAQ ===== */
+    .faq { padding: 90px 0; }
+    .faq-list { display: grid; gap: 10px; }
+    .faq-item {
+      border: 1px solid rgba(77,184,255,0.1);
+      border-radius: 4px; overflow: hidden;
+    }
+    .faq-q {
+      padding: 18px 22px;
+      cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      background: rgba(26,58,110,0.1);
+      font-size: 14px; font-weight: 500;
+      transition: background 0.2s;
+      user-select: none;
+    }
+    .faq-q:hover { background: rgba(26,58,110,0.25); }
+    .faq-icon {
+      font-size: 18px; color: var(--blue-glow);
+      flex-shrink: 0; transition: transform 0.3s;
+      line-height: 1;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease;
+      font-size: 13px; line-height: 2.1; color: var(--text-sub);
+    }
+    .faq-item.open .faq-a { max-height: 300px; }
+    .faq-a-inner { padding: 0 22px 18px; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 48px 24px 80px;
+      border-top: 1px solid rgba(77,184,255,0.08);
+      text-align: center;
+      position: relative; z-index: 1;
+    }
+    .footer-name {
+      font-family: 'Cinzel', serif;
+      font-size: 18px; letter-spacing: 6px;
+      background: linear-gradient(135deg, var(--blue-glow), var(--rose-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+    .footer-tagline {
+      font-size: 12px; color: var(--text-sub);
+      letter-spacing: 2px; margin-bottom: 20px;
+    }
+    .footer-link {
+      display: inline-block;
+      font-size: 12px; color: var(--blue-glow);
+      text-decoration: none; letter-spacing: 1px;
+      border-bottom: 1px solid rgba(77,184,255,0.3);
+      padding-bottom: 2px;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== SCROLL INDICATOR ===== */
+    .scroll-ind {
+      position: absolute; bottom: 28px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column;
+      align-items: center; gap: 8px;
+      color: rgba(77,184,255,0.4);
+      font-family: 'Cinzel', serif;
+      font-size: 9px; letter-spacing: 4px;
+      animation: scrollBounce 2.5s ease infinite;
+      z-index: 1;
+    }
+    .scroll-line {
+      width: 1px; height: 44px;
+      background: linear-gradient(180deg, rgba(77,184,255,0.4), transparent);
+    }
+    @keyframes scrollBounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(10px); }
+    }
+
+    /* ===== URGENCY BADGE ===== */
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(77,184,255,0.1);
+      border: 1px solid rgba(77,184,255,0.35);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 11px; letter-spacing: 2px;
+      color: var(--blue-glow);
+      margin-bottom: 20px;
+    }
+    .badge-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 8px #4ade80;
+      animation: pulse-dot 1.5s ease infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pulse-dot {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    /* ===== MID CTA ===== */
+    .mid-cta {
+      padding: 60px 24px;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(26,58,110,0.25), rgba(77,184,255,0.05), rgba(26,58,110,0.25));
+      border-top: 1px solid rgba(77,184,255,0.1);
+      border-bottom: 1px solid rgba(77,184,255,0.1);
+      position: relative; z-index: 1;
+    }
+    .mid-cta-title {
+      font-size: clamp(16px, 4vw, 20px);
+      font-weight: 700; margin-bottom: 8px;
+    }
+    .mid-cta-sub {
+      font-size: 12px; color: var(--text-sub);
+      margin-bottom: 24px; line-height: 1.8;
+    }
+    .btn-mid {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 14px; font-weight: 700;
+      letter-spacing: 2px;
+      padding: 14px 32px;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+    }
+    .btn-mid:hover {
+      background: var(--gold);
+      color: #050d1a;
+      box-shadow: 0 0 30px rgba(201,168,76,0.3);
+    }
+    .mid-cta-anchor {
+      display: block; margin-top: 12px;
+      font-size: 11px; color: var(--text-sub);
+    }
+
+    /* ===== SERVICE BULLETS ===== */
+    .service-know {
+      list-style: none;
+      margin-bottom: 20px;
+      display: grid; gap: 6px;
+    }
+    .service-know li {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 12px; color: var(--text-sub); line-height: 1.7;
+    }
+    .service-know li::before {
+      content: '✓';
+      color: var(--blue-glow);
+      font-size: 11px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .service-know-label {
+      font-size: 10px; letter-spacing: 2px;
+      color: var(--blue-glow); margin-bottom: 8px;
+    }
+
+    /* ===== VOICE AVATAR ===== */
+    .voice-header {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 16px;
+    }
+    .voice-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      border: 1px solid rgba(232,160,180,0.3);
+    }
+    .voice-avatar-a { background: linear-gradient(135deg, rgba(44,16,96,0.8), rgba(124,58,237,0.4)); }
+    .voice-avatar-b { background: linear-gradient(135deg, rgba(13,45,80,0.8), rgba(77,184,255,0.3)); }
+    .voice-avatar-c { background: linear-gradient(135deg, rgba(80,20,40,0.8), rgba(232,160,180,0.3)); }
+    .voice-header-right {}
+    .voice-header-name {
+      font-size: 12px; color: var(--text-sub);
+      letter-spacing: 1px; margin-bottom: 3px;
+    }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 520px) {
+      .hero-inner { padding: 60px 22px 72px; }
+      .trust-inner { gap: 28px; }
+      .reading-visual-overlay { padding: 24px; }
+      .reading-quote blockquote { font-size: 15px; }
+      .voice-card { padding: 22px 18px; }
+      .final-cta { padding: 80px 0; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="starCanvas"></canvas>
+
+<!-- ===== STICKY CTA ===== -->
+<div class="sticky-cta" id="stickyCta">
+  <div class="sticky-left">
+    <strong>彼の本音、今すぐ視る</strong>
+    <span>✦ マリナ恋愛霊視鑑定</span>
+  </div>
+  <a href="https://coconala.com/users/5372174?ref=service_main_column" target="_blank" class="btn-sticky">500円〜 相談する</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero section">
+  <div class="hero-bg"></div>
+  <div class="hero-gradient"></div>
+  <div class="hero-inner">
+    <div class="hero-badge" style="opacity:0;animation:fadeUp 1s ease 0.1s forwards">
+      <span class="badge-dot"></span>現在受付中
+    </div>
+    <p class="hero-label">SPIRITUAL LOVE READING</p>
+    <h1 class="hero-title">
+      彼の本音と、<br>
+      <em>この恋の未来を、</em><br>
+      魂から視る。
+    </h1>
+    <p class="hero-sub">
+      タロットを入り口に、魂の結びつき・お相手の潜在意識・<br>
+      ご縁の流れを丁寧に読み解く恋愛専門鑑定師。<br>
+      心が整えば、現実は必ず動き出します。
+    </p>
+    <div class="hero-cta-wrap">
+      <a href="https://coconala.com/users/5372174?ref=service_main_column" target="_blank" class="btn-hero">
+        ✦ 今すぐ鑑定を受ける
+      </a>
+      <span class="hero-note">評価 ★5.0 ｜ 7年の実績 ｜ 500円〜</span>
+    </div>
+  </div>
+  <div class="scroll-ind">
+    <div class="scroll-line"></div>
+    SCROLL
+  </div>
+</section>
+
+<!-- ===== TRUST BAR ===== -->
+<div class="trust-bar section">
+  <div class="trust-inner">
+    <div class="trust-item">
+      <div class="trust-num">7</div>
+      <div class="trust-label">YEARS EXPERIENCE</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-num">5.0</div>
+      <div class="trust-label">ALL ★★★★★</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-num">¥500</div>
+      <div class="trust-label">FROM / SESSION</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== EMPATHY ===== -->
+<section class="empathy section">
+  <div class="container">
+    <div class="sec-header">
+      <p class="sec-en">YOUR FEELINGS</p>
+      <h2 class="sec-ja">こんな気持ち、<span class="blue">ひとりで抱えていませんか</span></h2>
+      <p class="sec-desc">好きだからこそ、不安になる。想うほど、心が揺れる。</p>
+    </div>
+    <ul class="empathy-list">
+      <li class="empathy-item">
+        <span class="empathy-icon">🌙</span>
+        <div>
+          <p class="empathy-headline">彼の本音が知りたくて、眠れない夜がある</p>
+          <p class="empathy-sub">「本当はどう思っているの？」「このまま信じていていいの？」</p>
+        </div>
+      </li>
+      <li class="empathy-item">
+        <span class="empathy-icon">💬</span>
+        <div>
+          <p class="empathy-headline">連絡が来ない。待つべきか動くべきか迷っている</p>
+          <p class="empathy-sub">既読もつかなくて、答えが出せずにいる。</p>
+        </div>
+      </li>
+      <li class="empathy-item">
+        <span class="empathy-icon">🔄</span>
+        <div>
+          <p class="empathy-headline">復縁したい。でも可能性があるかわからない</p>
+          <p class="empathy-sub">動いていいのかすら、誰かに確かめてほしい。</p>
+        </div>
+      </li>
+      <li class="empathy-item">
+        <span class="empathy-icon">✨</span>
+        <div>
+          <p class="empathy-headline">この出会いに意味はある？この恋、進んでいい？</p>
+          <p class="empathy-sub">マッチングアプリで出会ったあの人への気持ち。</p>
+        </div>
+      </li>
+      <li class="empathy-item">
+        <span class="empathy-icon">💫</span>
+        <div>
+          <p class="empathy-headline">態度の裏にある、言葉にならない想いを知りたい</p>
+          <p class="empathy-sub">冷たいようで、無視でもない。あの感情の正体は？</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== MARINA STORY ===== -->
+<section class="story section">
+  <div class="container">
+    <div class="sec-header">
+      <p class="sec-en">ABOUT MARINA</p>
+      <h2 class="sec-ja"><span class="rose">マリナ</span>について</h2>
+    </div>
+    <div class="story-photo-wrap">
+      <div class="story-photo-glow"></div>
+      <img src="marina-profile.jpg" alt="マリナ 恋愛霊視鑑定師" class="story-photo">
+    </div>
+    <div class="story-name-plate">
+      <p class="story-name">MARINA</p>
+      <p class="story-role">恋愛専門 霊視鑑定師 ｜ 鑑定歴7年</p>
+    </div>
+
+    <div class="philosophy-quote">
+      "当てるだけの鑑定ではなく、<br>
+      心が整い、現実が動き出す鑑定を。"
+      <span>— MARINA</span>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar">
+        <span class="pillar-icon">🔮</span>
+        <p class="pillar-title">霊視で深層を読む</p>
+        <p class="pillar-desc">言葉にならない感情・潜在意識の奥まで</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">🌙</span>
+        <p class="pillar-title">不安を煽らない</p>
+        <p class="pillar-desc">厳しい結果でも、具体的な次の一手を</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">✨</span>
+        <p class="pillar-title">魂から現実へ</p>
+        <p class="pillar-desc">ご縁の流れを読み、現実を動かす</p>
+      </div>
+    </div>
+
+    <div class="marina-msg-blocks">
+      <div class="marina-msg marina-msg-a">
+        恋愛は、好きだからこそ不安になるものです。<br>
+        想えば想うほど「本当はどう思っているの？」「このまま進んでいいの？」と、心が揺れてしまう。<br>
+        そんな<strong style="color:var(--blue-glow)">「言葉にできない気持ち」を、私は霊視で丁寧に受け取ります。</strong>
+      </div>
+      <div class="marina-msg marina-msg-b">
+        <strong>怖がらせるための表現や、不安をあおるお伝え方はいたしません。</strong><br>
+        たとえ厳しいメッセージが出た時も、「では今、どうすれば流れを整えられるか」まで具体的にお伝えします。<br>
+        あなたの心を置き去りにしない鑑定を、心がけています。
+      </div>
+      <div class="marina-msg marina-msg-c">
+        ご縁には、意味があります。<br>
+        苦しい恋にも、待つ時間にも、うまくいかない理由にも、<br>
+        必ず魂からのサインがある。<br><br>
+        ひとりで抱えきれなくなった時は、どうか安心してお話しください。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOUL VIEW ===== -->
+<section class="soul-view section">
+  <div class="soul-view-bg"></div>
+  <div class="container">
+    <div class="sec-header">
+      <p class="sec-en">SOUL PERSPECTIVE</p>
+      <h2 class="sec-ja">魂の視点から<span class="blue">見えること</span></h2>
+      <p class="sec-desc">表面だけ見ると複雑に見える恋愛も、魂の視点からは本質が見えてきます。</p>
+    </div>
+    <ul class="soul-list">
+      <li class="soul-item"><div class="soul-dot">🌀</div>なぜ今、すれ違っているのか</li>
+      <li class="soul-item"><div class="soul-dot">😶</div>お相手は何を恐れているのか</li>
+      <li class="soul-item"><div class="soul-dot">🔗</div>このご縁は続いていくのか</li>
+      <li class="soul-item"><div class="soul-dot">⏳</div>今は待つ時か、動く時か</li>
+      <li class="soul-item"><div class="soul-dot">💕</div>復縁の可能性と、そのために今できること</li>
+      <li class="soul-item"><div class="soul-dot">🌟</div>この出会いが運命に繋がるものかどうか</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== MID CTA ===== -->
+<div class="mid-cta">
+  <p class="mid-cta-title">今の不安を、答えに変えませんか</p>
+  <p class="mid-cta-sub">まずは500円から。コーヒー一杯分で、<br>ずっと抱えていた答えが見つかるかもしれません。</p>
+  <a href="https://coconala.com/users/5372174?ref=service_main_column" target="_blank" class="btn-mid">
+    ✦ メニューを見る
+  </a>
+  <span class="mid-cta-anchor">↓ 3つのメニューから選べます</span>
+</div>
+
+<!-- ===== SERVICES ===== -->
+<section class="services section">
+  <div class="container">
+    <div class="sec-header">
+      <p class="sec-en">READING MENU</p>
+      <h2 class="sec-ja">鑑定<span class="gold">メニュー</span></h2>
+      <p class="sec-desc">あなたの状況に合ったメニューをお選びください</p>
+    </div>
+    <div class="service-grid">
+
+      <div class="service-card">
+        <div class="service-card-accent"></div>
+        <p class="service-num">01 · SPIRITUAL READING</p>
+        <h3 class="service-title">彼の気持ちを霊視で占います<br><small style="font-size:13px;font-weight:400;color:var(--text-sub)">本音や連絡が来ない理由も丁寧に読み解きます</small></h3>
+        <p class="service-desc">彼の心の深層を霊視で読み解き、今あなたに必要なメッセージをお伝えします。</p>
+        <p class="service-know-label">— 鑑定でわかること</p>
+        <ul class="service-know">
+          <li>彼が今あなたに対して感じていること</li>
+          <li>連絡が来ない本当の理由</li>
+          <li>今、あなたが取るべき行動</li>
+        </ul>
+        <div class="service-bottom">
+          <div class="service-price">¥500 <small>〜</small></div>
+          <a href="https://coconala.com/services/3692078?ref=profile_top_service" target="_blank" class="btn-service">詳細・購入 →</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-card-accent"></div>
+        <p class="service-num">02 · SILENCE READING</p>
+        <h3 class="service-title">宇宙の沈黙<br><small style="font-size:13px;font-weight:400;color:var(--text-sub)">マッチングアプリ・既読無視を鑑定します</small></h3>
+        <p class="service-desc">返信なし・既読無視——その沈黙の意味と、次に取るべき行動を読み解きます。</p>
+        <p class="service-know-label">— 鑑定でわかること</p>
+        <ul class="service-know">
+          <li>沈黙の裏にある相手の本当の気持ち</li>
+          <li>このまま待つべきか・動くべきか</li>
+          <li>この縁が続くかどうかの見極め</li>
+        </ul>
+        <div class="service-bottom">
+          <div class="service-price">¥500 <small>〜</small></div>
+          <a href="https://coconala.com/services/4089263?ref=profile_top_service" target="_blank" class="btn-service">詳細・購入 →</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-card-accent"></div>
+        <p class="service-num">03 · DESTINY READING</p>
+        <h3 class="service-title">運命の出会い<br><small style="font-size:13px;font-weight:400;color:var(--text-sub)">相手の特徴と時期をタロットで視ます</small></h3>
+        <p class="service-desc">タロットで運命の相手の特徴・出会いの時期・ご縁のつながりを具体的に視ます。</p>
+        <p class="service-know-label">— 鑑定でわかること</p>
+        <ul class="service-know">
+          <li>運命の相手の外見・雰囲気・職業など特徴</li>
+          <li>出会いが訪れる時期の目安</li>
+          <li>今のあなたに必要な意識の変化</li>
+        </ul>
+        <div class="service-bottom">
+          <div class="service-price">¥500 <small>〜</small></div>
+          <a href="https://coconala.com/services/4101625?ref=profile_top_service" target="_blank" class="btn-service">詳細・購入 →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== READING VISUAL ===== -->
+<div class="reading-visual section">
+  <img src="marina-reading.jpg" alt="マリナの鑑定イメージ">
+  <div class="reading-visual-overlay">
+    <div class="reading-quote">
+      <blockquote>
+        "心が整い、<br>現実が動き出す<br>鑑定を目指して。"
+      </blockquote>
+      <cite>— MARINA</cite>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FLOW ===== -->
+<section class="flow section">
+  <div class="container">
+    <div class="sec-header">
+      <p class="sec-en">HOW IT WORKS</p>
+      <h2 class="sec-ja">鑑定の<span class="blue">流れ</span></h2>
+    </div>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-col-l">
+          <div class="flow-num">01</div>
+          <div class="flow-connector"></div>
+        </div>
+        <div class="flow-col-r">
+          <p class="flow-title">メニューを選んで購入</p>
+          <p class="flow-desc">気になるサービスをCoconalaで購入します。<br>500円〜お気軽にどうぞ。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-col-l">
+          <div class="flow-num">02</div>
+          <div class="flow-connector"></div>
+        </div>
+        <div class="flow-col-r">
+          <p class="flow-title">お悩みを送る</p>
+          <p class="flow-desc">相談内容・お相手との状況をメッセージにてお送りください。<br>詳しければ詳しいほど、精度が上がります。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-col-l">
+          <div class="flow-num">03</div>
+          <div class="flow-connector"></div>
+        </div>
+        <div class="flow-col-r">
+          <p class="flow-title">霊視・タロット鑑定</p>
+          <p class="flow-desc">マリナが霊視とタロットで、魂のメッセージを読み解きます。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-col-l">
+          <div class="flow-num">04</div>
+        </div>
+        <div class="flow-col-r">
+          <p class="flow-title">結果をお届け</p>
+          <p class="flow-desc">具体的な鑑定結果と、前へ進むためのメッセージをお伝えします。<br>心が整い、現実が動き始めます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VOICE ===== -->
+<section class="voice section">
+  <div class="container">
+    <div class="sec-header">
+      <p class="sec-en">CLIENT VOICES</p>
+      <h2 class="sec-ja">実際の<span class="rose">お客様の声</span></h2>
+      <p class="sec-desc">すべて★5.0の評価をいただいています</p>
+    </div>
+    <div class="voice-grid">
+
+      <div class="voice-card">
+        <div class="voice-header">
+          <div class="voice-avatar voice-avatar-a">🌙</div>
+          <div class="voice-header-right">
+            <div class="voice-stars">★★★★★</div>
+            <p class="voice-header-name">女性 ｜ 恋愛占い</p>
+          </div>
+        </div>
+        <p class="voice-service">彼の気持ちを霊視で占います</p>
+        <p class="voice-text">すごく細やかに鑑定してくださり、出品者様のお人柄が伝わってきました。安心できましたし自信が持てました！ありがとうございました！</p>
+      </div>
+
+      <div class="voice-card">
+        <div class="voice-header">
+          <div class="voice-avatar voice-avatar-b">✨</div>
+          <div class="voice-header-right">
+            <div class="voice-stars">★★★★★</div>
+            <p class="voice-header-name">女性 ｜ 恋愛占い</p>
+          </div>
+        </div>
+        <p class="voice-service">あなたと彼の魂の繋がり、そしてこの先の未来を視ます</p>
+        <p class="voice-text">すぐにご鑑定頂きありがとうございます！少ないカードから具体的にリーディングをして頂きすごいなと思いました。また機会がありましたら宜しくお願い致します。</p>
+      </div>
+
+      <div class="voice-card">
+        <div class="voice-header">
+          <div class="voice-avatar voice-avatar-c">💫</div>
+          <div class="voice-header-right">
+            <div class="voice-stars">★★★★★</div>
+            <p class="voice-header-name">女性 ｜ 恋愛占い</p>
+          </div>
+        </div>
+        <p class="voice-service">彼の気持ちを霊視で占います</p>
+        <p class="voice-text">ありがとうございます。</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="final-cta section">
+  <div class="final-cta-bg"></div>
+  <div class="final-cta-overlay"></div>
+  <div class="final-inner container">
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span class="divider-sym">✦</span>
+      <div class="divider-line"></div>
+    </div>
+    <p class="final-caption">TAKE THE FIRST STEP</p>
+    <h2 class="final-title">
+      あなたの恋が、<br>
+      <span class="rose">執着ではなく</span><br>
+      愛として育っていくように。
+    </h2>
+    <p class="final-sub">
+      ピンと来てくださった方は、今このタイミングもご縁です。<br>
+      ひとりで抱えきれない想いがある時は、<br>
+      どうか安心してお話しください。
+    </p>
+    <a href="https://coconala.com/users/5372174?ref=service_main_column" target="_blank" class="btn-hero">
+      ✦ マリナに相談する
+    </a>
+    <p class="final-guarantee">
+      <span>🌙</span> Coconala安心保証 ｜ 評価★5.0 ｜ 7年の実績
+    </p>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="faq section">
+  <div class="container">
+    <div class="sec-header">
+      <p class="sec-en">FAQ</p>
+      <h2 class="sec-ja">よくある<span class="gold">ご質問</span></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">占いが初めてでも大丈夫ですか？<span class="faq-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">もちろんです。占い初心者の方も多くご利用いただいています。購入後のメッセージで状況を教えていただくだけでOKです。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">相手の名前や生年月日は必要ですか？<span class="faq-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">名前や生年月日がわかれば精度が上がりますが、なくても鑑定は可能です。まずはわかる範囲でお知らせください。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">鑑定結果が出るまでどのくらいかかりますか？<span class="faq-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">通常1〜3日以内にお届けしています。お急ぎの場合はメッセージにてご相談ください。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">厳しい結果が出ても正直に教えてもらえますか？<span class="faq-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">はい。ただ怖がらせるような伝え方はいたしません。厳しめのメッセージが出た場合も、「では今どうすれば流れを整えられるか」まで具体的にお伝えします。あなたの心を置き去りにしない鑑定を心がけています。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">複数の悩みをまとめて相談できますか？<span class="faq-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">はい、ご相談内容に合わせて柔軟に対応いたします。まずはメッセージでお気軽にご相談ください。</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <p class="footer-name">MARINA</p>
+  <p class="footer-tagline">恋愛専門 霊視鑑定師 ｜ 魂結び</p>
+  <a href="https://coconala.com/users/5372174?ref=service_main_column" target="_blank" class="footer-link">Coconalaで鑑定を受ける →</a>
+</footer>
+
+<script>
+// ===== STAR CANVAS =====
+(function(){
+  const c = document.getElementById('starCanvas');
+  const x = c.getContext('2d');
+  let stars = [];
+
+  function resize(){
+    c.width  = window.innerWidth;
+    c.height = window.innerHeight;
+  }
+  function init(){
+    stars = Array.from({length: 160}, () => ({
+      x: Math.random() * c.width,
+      y: Math.random() * c.height,
+      r: Math.random() * 1.1 + 0.2,
+      a: Math.random(),
+      spd: (Math.random() * 0.004 + 0.001) * (Math.random() < 0.5 ? 1 : -1)
+    }));
+  }
+  function draw(){
+    x.clearRect(0, 0, c.width, c.height);
+    stars.forEach(s => {
+      s.a += s.spd;
+      if(s.a > 1 || s.a < 0) s.spd *= -1;
+      x.beginPath();
+      x.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      x.fillStyle = `rgba(180,210,255,${Math.max(0, Math.min(1, s.a)) * 0.55})`;
+      x.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  resize(); init(); draw();
+  window.addEventListener('resize', () => { resize(); init(); });
+})();
+
+// ===== SCROLL ANIMATIONS =====
+const io = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if(e.isIntersecting){
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.empathy-item, .soul-item, .service-card').forEach(el => io.observe(el));
+
+// ===== STICKY CTA =====
+const stickyCta = document.getElementById('stickyCta');
+window.addEventListener('scroll', () => {
+  stickyCta.classList.toggle('show', window.scrollY > 600);
+}, { passive: true });
+
+// ===== FAQ =====
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    q.closest('.faq-item').classList.toggle('open');
+  });
+});
+</script>
+</body>
+</html>
