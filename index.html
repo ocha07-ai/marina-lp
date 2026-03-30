@@ -754,19 +754,20 @@
     }
     .btn-mid {
       display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+      background-size: 200%;
+      animation: shimmer 3s ease infinite;
       border: 1px solid var(--gold);
-      color: var(--gold);
+      color: #050d1a;
       font-size: 14px; font-weight: 700;
       letter-spacing: 2px;
       padding: 14px 32px;
       text-decoration: none;
       border-radius: 2px;
-      transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+      transition: box-shadow 0.3s;
     }
     .btn-mid:hover {
-      background: var(--gold);
-      color: #050d1a;
-      box-shadow: 0 0 30px rgba(201,168,76,0.3);
+      box-shadow: 0 0 40px rgba(201,168,76,0.45), 0 4px 20px rgba(0,0,0,0.4);
     }
     .mid-cta-anchor {
       display: block; margin-top: 12px;
@@ -886,6 +887,10 @@
     <div class="trust-item">
       <div class="trust-num">¥500</div>
       <div class="trust-label">FROM / SESSION</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-num" style="font-size:20px;line-height:1.6">1〜3日</div>
+      <div class="trust-label">DELIVERY</div>
     </div>
   </div>
 </div>
@@ -1035,7 +1040,7 @@
     <div class="sec-header">
       <p class="sec-en">READING MENU</p>
       <h2 class="sec-ja">鑑定<span class="gold">メニュー</span></h2>
-      <p class="sec-desc">あなたの状況に合ったメニューをお選びください</p>
+      <p class="sec-desc">あなたの状況に合ったメニューをお選びください。結果は1〜3日でお届けします。</p>
     </div>
     <div class="service-grid">
 
@@ -1060,13 +1065,14 @@
       <div class="service-card">
         <div class="service-card-accent"></div>
         <p class="service-num">02 · SILENCE READING</p>
-        <h3 class="service-title">宇宙の沈黙<br><small style="font-size:13px;font-weight:400;color:var(--text-sub)">マッチングアプリ・既読無視を鑑定します</small></h3>
-        <p class="service-desc">返信なし・既読無視——その沈黙の意味と、次に取るべき行動を読み解きます。</p>
+        <h3 class="service-title">宇宙の沈黙<br><small style="font-size:13px;font-weight:400;color:var(--text-sub)">カードと心理学で「なぜ」まで届けます</small></h3>
+        <p class="service-desc">返信なし・既読無視——その沈黙の意味と、次に取るべき行動を読み解きます。タロット＋男性心理学で、表面的な気持ちだけでなく「なぜそう動くのか」まで分析します。</p>
         <p class="service-know-label">— 鑑定でわかること</p>
         <ul class="service-know">
           <li>沈黙の裏にある相手の本当の気持ち</li>
           <li>このまま待つべきか・動くべきか</li>
           <li>この縁が続くかどうかの見極め</li>
+          <li>約1,500〜2,500字でお届け（追加質問1回まで）</li>
         </ul>
         <div class="service-bottom">
           <div class="service-price">¥500 <small>〜</small></div>
@@ -1077,13 +1083,14 @@
       <div class="service-card">
         <div class="service-card-accent"></div>
         <p class="service-num">03 · DESTINY READING</p>
-        <h3 class="service-title">運命の出会い<br><small style="font-size:13px;font-weight:400;color:var(--text-sub)">相手の特徴と時期をタロットで視ます</small></h3>
+        <h3 class="service-title">運命の出会い<br><small style="font-size:13px;font-weight:400;color:var(--text-sub)">外見・性格・出会う時期まで。魂の形から読み解きます</small></h3>
         <p class="service-desc">タロットで運命の相手の特徴・出会いの時期・ご縁のつながりを具体的に視ます。</p>
         <p class="service-know-label">— 鑑定でわかること</p>
         <ul class="service-know">
           <li>運命の相手の外見・雰囲気・職業など特徴</li>
           <li>出会いが訪れる時期の目安</li>
           <li>今のあなたに必要な意識の変化</li>
+          <li>約2,000字でお届け（追加質問1回まで）</li>
         </ul>
         <div class="service-bottom">
           <div class="service-price">¥500 <small>〜</small></div>
@@ -1165,7 +1172,7 @@
     <div class="sec-header">
       <p class="sec-en">CLIENT VOICES</p>
       <h2 class="sec-ja">実際の<span class="rose">お客様の声</span></h2>
-      <p class="sec-desc">すべて★5.0の評価をいただいています</p>
+      <p class="sec-desc">全件★5.0｜いただいた声をそのままお届けしています</p>
     </div>
     <div class="voice-grid">
 
@@ -1201,9 +1208,8 @@
             <p class="voice-header-name">女性 ｜ 恋愛占い</p>
           </div>
         </div>
-        <p class="voice-service">彼の気持ちを霊視で占います</p>
-        <!-- TODO: Coconalaから具体的な口コミに差し替えてください（例：「彼から連絡が来ました」等の結果がわかる内容） -->
-        <p class="voice-text">ありがとうございます。</p>
+        <p class="voice-service">魂が求めている運命の人をソウルリーディングで視ます</p>
+        <p class="voice-text"><span class="voice-highlight">とても丁寧でボリュームある鑑定をありがとうございました。納品も早くて嬉しかったです。</span>肯定的で前向きな鑑定結果で希望が持てます。また変化があったらお願いします。</p>
       </div>
 
     </div>
