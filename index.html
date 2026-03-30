@@ -169,6 +169,39 @@
       font-size: 11px; color: var(--text-sub);
       letter-spacing: 1px;
     }
+    .btn-secondary {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 12px;
+      color: rgba(220,210,240,0.55);
+      text-decoration: none;
+      letter-spacing: 2px;
+      border-bottom: 1px solid rgba(220,210,240,0.18);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-secondary:hover {
+      color: var(--blue-glow);
+      border-color: rgba(77,184,255,0.5);
+    }
+    .service-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #050d1a;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 1px;
+      padding: 3px 10px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .voice-highlight {
+      background: rgba(77,184,255,0.1);
+      border-left: 2px solid rgba(77,184,255,0.5);
+      padding: 2px 6px;
+      border-radius: 2px;
+      font-weight: 700;
+      color: var(--text);
+    }
 
     /* ===== SECTION BASE ===== */
     .section { position: relative; z-index: 1; }
@@ -822,15 +855,15 @@
       魂から視る。
     </h1>
     <p class="hero-sub">
-      タロットを入り口に、魂の結びつき・お相手の潜在意識・<br>
-      ご縁の流れを丁寧に読み解く恋愛専門鑑定師。<br>
-      心が整えば、現実は必ず動き出します。
+      タロットと霊視で、<strong style="color:var(--rose-light)">彼の本音・連絡が来ない理由・この恋の行方</strong>を読み解きます。<br>
+      結果は1〜3日でお届け。まずは500円から試せます。
     </p>
     <div class="hero-cta-wrap">
       <a href="https://coconala.com/users/5372174?ref=service_main_column" target="_blank" class="btn-hero">
         ✦ 今すぐ鑑定を受ける
       </a>
-      <span class="hero-note">評価 ★5.0 ｜ 7年の実績 ｜ 500円〜</span>
+      <span class="hero-note">評価 ★5.0 ｜ 7年の実績 ｜ 1〜3日でお届け ｜ 500円〜</span>
+      <a href="#services" class="btn-secondary">▼ まずメニューを確認する</a>
     </div>
   </div>
   <div class="scroll-ind">
@@ -976,12 +1009,12 @@
       <p class="sec-desc">表面だけ見ると複雑に見える恋愛も、魂の視点からは本質が見えてきます。</p>
     </div>
     <ul class="soul-list">
-      <li class="soul-item"><div class="soul-dot">🌀</div>なぜ今、すれ違っているのか</li>
-      <li class="soul-item"><div class="soul-dot">😶</div>お相手は何を恐れているのか</li>
-      <li class="soul-item"><div class="soul-dot">🔗</div>このご縁は続いていくのか</li>
-      <li class="soul-item"><div class="soul-dot">⏳</div>今は待つ時か、動く時か</li>
-      <li class="soul-item"><div class="soul-dot">💕</div>復縁の可能性と、そのために今できること</li>
-      <li class="soul-item"><div class="soul-dot">🌟</div>この出会いが運命に繋がるものかどうか</li>
+      <li class="soul-item"><div class="soul-dot">🌀</div>すれ違いの原因がわかり、<strong style="color:var(--rose-light)">次に取るべき行動が見える</strong></li>
+      <li class="soul-item"><div class="soul-dot">😶</div>彼が本当に求めていることが、<strong style="color:var(--rose-light)">はっきりわかる</strong></li>
+      <li class="soul-item"><div class="soul-dot">🔗</div>この恋に時間をかける意味があるか、<strong style="color:var(--rose-light)">判断できる</strong></li>
+      <li class="soul-item"><div class="soul-dot">⏳</div>待つべきか動くべきか、<strong style="color:var(--rose-light)">迷わなくなる</strong></li>
+      <li class="soul-item"><div class="soul-dot">💕</div>復縁の可能性と、<strong style="color:var(--rose-light)">今すぐ取れる行動がわかる</strong></li>
+      <li class="soul-item"><div class="soul-dot">🌟</div>この出会いに本当の意味があるか、<strong style="color:var(--rose-light)">魂から視える</strong></li>
     </ul>
   </div>
 </section>
@@ -1008,6 +1041,7 @@
 
       <div class="service-card">
         <div class="service-card-accent"></div>
+        <span class="service-badge">✦ 人気 No.1</span>
         <p class="service-num">01 · SPIRITUAL READING</p>
         <h3 class="service-title">彼の気持ちを霊視で占います<br><small style="font-size:13px;font-weight:400;color:var(--text-sub)">本音や連絡が来ない理由も丁寧に読み解きます</small></h3>
         <p class="service-desc">彼の心の深層を霊視で読み解き、今あなたに必要なメッセージをお伝えします。</p>
@@ -1144,7 +1178,7 @@
           </div>
         </div>
         <p class="voice-service">彼の気持ちを霊視で占います</p>
-        <p class="voice-text">すごく細やかに鑑定してくださり、出品者様のお人柄が伝わってきました。安心できましたし自信が持てました！ありがとうございました！</p>
+        <p class="voice-text">すごく細やかに鑑定してくださり、出品者様のお人柄が伝わってきました。<span class="voice-highlight">安心できましたし自信が持てました！</span>ありがとうございました！</p>
       </div>
 
       <div class="voice-card">
@@ -1156,7 +1190,7 @@
           </div>
         </div>
         <p class="voice-service">あなたと彼の魂の繋がり、そしてこの先の未来を視ます</p>
-        <p class="voice-text">すぐにご鑑定頂きありがとうございます！少ないカードから具体的にリーディングをして頂きすごいなと思いました。また機会がありましたら宜しくお願い致します。</p>
+        <p class="voice-text">すぐにご鑑定頂きありがとうございます！<span class="voice-highlight">少ないカードから具体的にリーディングをして頂きすごいな</span>と思いました。また機会がありましたら宜しくお願い致します。</p>
       </div>
 
       <div class="voice-card">
@@ -1168,6 +1202,7 @@
           </div>
         </div>
         <p class="voice-service">彼の気持ちを霊視で占います</p>
+        <!-- TODO: Coconalaから具体的な口コミに差し替えてください（例：「彼から連絡が来ました」等の結果がわかる内容） -->
         <p class="voice-text">ありがとうございます。</p>
       </div>
 
@@ -1232,6 +1267,14 @@
       <div class="faq-item">
         <div class="faq-q">複数の悩みをまとめて相談できますか？<span class="faq-icon">+</span></div>
         <div class="faq-a"><div class="faq-a-inner">はい、ご相談内容に合わせて柔軟に対応いたします。まずはメッセージでお気軽にご相談ください。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">料金はどのくらいかかりますか？<span class="faq-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">基本メニューは500円〜です。ご質問の内容や量によってプランが異なりますので、各サービスページの詳細をご確認ください。まずは一番気になるメニューから気軽にお試しいただけます。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">他の鑑定師との違いは何ですか？<span class="faq-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">マリナの鑑定は「当てるだけ」で終わりません。たとえ厳しいメッセージが出た時も、「では今、どうすれば流れを整えられるか」まで具体的な次の一手をお伝えします。また、タロットに加えて霊視を組み合わせることで、言葉にならない感情・潜在意識の奥まで読み解く深層リーディングが特徴です。</div></div>
       </div>
     </div>
   </div>
